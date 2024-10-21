@@ -21,13 +21,21 @@ class GameController:
             enemy.move()
 
     def check_collisions(self):
-        """Check for bullet-enemy collisions"""
+        # Verifica colisão entre a bala e os inimigos
         for enemy in self.enemies:
-            if self.collision_service.is_collision(self.bullet, enemy) and self.bullet.state == "fire":
-                self.bullet.y = 480
-                self.bullet.state = "ready"
+            if self.bullet.rect.colliderect(enemy.rect):
+                # Quando a bala colide com o inimigo
+                print("Colisão detectada: Bala e Inimigo")
+                self.enemies.remove(enemy)  # Remove inimigo após colisão
+                self.bullet.reset()  # Reseta a bala ou a remove
                 self.score += 1
-                enemy.reset_position()
+
+        # Verifica colisão entre o jogador e os inimigos
+        for enemy in self.enemies:
+            if self.player.rect.colliderect(enemy.rect):
+                # Quando o jogador colide com o inimigo
+                print("Colisão detectada: Jogador e Inimigo")
+                self.game_over()  # Chama a função de game over
 
     def fire_bullet(self):
         """Fire bullet if ready"""
@@ -45,3 +53,9 @@ class GameController:
             self.player.x_change = self.player_speed * delta_time   # Move right
         else:
             self.player.x_change = 0  # Stop movement if no keys are pressed
+
+    def game_over(self):
+        """Lógica de fim de jogo"""
+        print("Fim de Jogo!")
+        pygame.quit()  # Encerra o pygame
+        quit()  # Encerra o programa

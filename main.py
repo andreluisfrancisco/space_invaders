@@ -22,11 +22,11 @@ def main():
     running = True
     while running:
         # Limpa a tela a cada frame
-        screen.fill((0, 0, 0))  # Cor de fundo (preto)
+        screen.fill((0, 0, 0))
 
         # Calcula o delta_time (tempo entre frames em segundos)
-        delta_time = clock.tick(60) / 1000.0  # Limita a 60 FPS e converte para segundos
-
+        delta_time = clock.tick(60) / 1000.0 
+        
         # Verifica eventos para fechar o jogo
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
