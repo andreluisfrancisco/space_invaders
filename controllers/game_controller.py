@@ -35,7 +35,7 @@ class GameController:
             if self.player.rect.colliderect(enemy.rect):
                 # Quando o jogador colide com o inimigo
                 print("Colisão detectada: Jogador e Inimigo")
-                self.game_over()  # Chama a função de game over
+                self.game_over()
 
     def fire_bullet(self):
         """Fire bullet if ready"""
